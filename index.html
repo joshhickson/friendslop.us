@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>friendslop</title>
-<meta name="description" content="Everyone's vibecoding games. Almost nobody's vibecoding multiplayer. friendslop is the multiplayer part: rooms, lobbies, bots and hosting, built for AI coding tools.">
+<meta name="description" content="friendslop: a kit for making small, chaotic multiplayer games and playing them with your friends tonight. Rooms, lobbies, bots and hosting are already done.">
 <meta property="og:title" content="friendslop">
 <meta property="og:description" content="Multiplayer in one command. Arguments in two minutes.">
 <meta property="og:url" content="https://friendslop.us/">
@@ -41,7 +41,7 @@
   <section class="wrap hero" aria-labelledby="hero-title">
     <div>
       <h1 id="hero-title">Multiplayer in one command. Arguments in two minutes.</h1>
-      <p class="lede">friendslop is the multiplayer part of your next game. Rooms, lobbies, bots and hosting are already done, so you and your AI coding tool only build the fun part.</p>
+      <p class="lede">friendslop is a kit for making small, chaotic multiplayer games. Rooms, lobbies, bots and hosting are already done, so you only build the fun part.</p>
       <form class="join" id="join" autocomplete="off">
         <label for="code">Got a room code?</label>
         <input id="code" name="code" maxlength="9" placeholder="SLOP-0000" aria-describedby="join-reply">
@@ -80,21 +80,21 @@
   </section>
 
   <section class="wrap trend" aria-label="Why friendslop">
-    <p>Everyone's vibecoding games. Almost nobody's vibecoding multiplayer.</p>
-    <p>Single player is a weekend with an AI tool. Multiplayer is rooms, lobbies, netcode, hosting and cheaters, and that's where most projects stall. friendslop does that part once, for every game you make.</p>
+    <p>Make a dumb game tonight. Play it with your friends by midnight.</p>
+    <p>Multiplayer is usually where a game idea dies: rooms, lobbies, netcode, hosting and cheaters. friendslop does that part once, for every game you make.</p>
   </section>
 
   <section class="wrap" aria-labelledby="how-title">
     <h2 id="how-title">How it works</h2>
-    <p class="section-lede">Each game is one folder with clear places for your ideas, so your AI tool knows exactly where to put them.</p>
+    <p class="section-lede">Each game is one folder with clear places for your rules. Everything else is already there.</p>
     <ol class="steps">
       <li>
         <h3>Start a game</h3>
         <p>You get a working folder with rooms, a lobby and teams already wired up.</p>
       </li>
       <li>
-        <h3>Describe it to your AI</h3>
-        <p>Claude Code, Cursor, whatever you use. Tell it the rules and let it build.</p>
+        <h3>Add your rules</h3>
+        <p>Write the part that makes your game yours, and skip the networking entirely.</p>
         <span class="say">"It's tag, but the floor is lava and the bots cheat."</span>
       </li>
       <li>
@@ -102,21 +102,6 @@
         <p>Friends click it and land in your lobby. No installs, no accounts, no router settings.</p>
       </li>
     </ol>
-  </section>
-
-  <section class="wrap" aria-label="Two big ideas">
-    <div class="callouts">
-      <article class="callout">
-        <h3>Bots join like players</h3>
-        <p>Bots fill empty slots so you can test alone. They connect the same way people do, which means your own code, or an AI agent, can take a seat at the table.</p>
-        <p class="more"><a href="/bots/">How bots work</a></p>
-      </article>
-      <article class="callout">
-        <h3>A protocol, not a JavaScript framework</h3>
-        <p>The alpha is JavaScript because it's quick. The rooms run on a plain protocol, so servers, clients and bots in any language can join later, Rust and WebAssembly included.</p>
-        <p class="more"><a href="/protocol/">Read the plan</a></p>
-      </article>
-    </div>
   </section>
 
   <section class="wrap" aria-labelledby="box-title">
@@ -156,6 +141,28 @@
     </div>
   </section>
 
+  <section class="wrap" aria-labelledby="extras-title">
+    <h2 id="extras-title">And on top of that</h2>
+    <p class="section-lede">Not needed to make your first game, but there when you want them.</p>
+    <div class="callouts">
+      <article class="callout">
+        <h3>Bots join like players</h3>
+        <p>Bots fill empty slots, so you can test alone or top up a thin lobby. They connect the same way people do, so your own code can play too, and later an AI agent.</p>
+        <p class="more"><a href="/bots/">How bots work</a></p>
+      </article>
+      <article class="callout">
+        <h3>Not stuck with one language</h3>
+        <p>The alpha is JavaScript because it's quick. Rooms run on a plain protocol, so clients and bots in other languages can join later, Rust and WebAssembly included.</p>
+        <p class="more"><a href="/protocol/">Read the plan</a></p>
+      </article>
+      <article class="callout">
+        <h3>Easy to build with AI</h3>
+        <p>One folder per game with clear hooks means coding tools like Claude Code or Cursor know where your rules go, if you'd rather describe a game than type it.</p>
+        <p class="more"><a href="/docs/">What the docs will cover</a></p>
+      </article>
+    </div>
+  </section>
+
   <section class="wrap" aria-labelledby="build-title">
     <h2 id="build-title">Follow the build</h2>
     <p class="section-lede">Everything happens in one public repo. The alpha is in testing, and the code goes up when it's ready.</p>
@@ -183,10 +190,6 @@
         <p>Not yet. It's being built right now. Watch <a href="https://github.com/joshhickson/friendslop">the repo on GitHub</a> to see the code land.</p>
       </details>
       <details>
-        <summary>Does it work with my AI coding tool?</summary>
-        <p>That's who it's built for. A game is one folder with clear hooks, plus a guide your tool can read, so Claude Code, Cursor and the rest know where your idea goes.</p>
-      </details>
-      <details>
         <summary>Do I have to use JavaScript?</summary>
         <p>For the alpha, yes. After that, no: the plan is a documented protocol any language can speak. <a href="/protocol/">More on the protocol page</a>.</p>
       </details>
@@ -197,6 +200,10 @@
       <details>
         <summary>Will it be free?</summary>
         <p>Yes. It's a free, open kit under the Apache-2.0 license, and you host it yourself. No store page, no account to make.</p>
+      </details>
+      <details>
+        <summary>Can I build with an AI coding tool?</summary>
+        <p>Yes, and it's a good fit. A game is one folder with clear hooks and a guide to read, so tools like Claude Code or Cursor know where your rules go.</p>
       </details>
       <details>
         <summary>Why does one theme look broken?</summary>

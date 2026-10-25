@@ -223,13 +223,14 @@ main section { padding-block: 56px; }
 .steps .say { display: block; margin-top: 10px; font-weight: 800; color: var(--ink); }
 
 /* callouts: one per big idea, each leading to its own page */
-.callouts { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.callouts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .callout {
   background: var(--panel); border: 3px solid var(--panel-edge);
   padding: 24px; display: flex; flex-direction: column; gap: 12px;
 }
 .callout:nth-child(1) { border-radius: 6px 22px 6px 22px; }
 .callout:nth-child(2) { border-radius: 22px 6px 22px 6px; }
+.callout:nth-child(3) { border-radius: 12px; }
 .callout h3 { font-size: 1.5rem; }
 .callout p { margin: 0; color: var(--ink-soft); }
 .callout .more { margin-top: auto; }
