@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en" data-theme="blockout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>friendslop</title>
+<meta name="description" content="friendslop: a kit for vibecoding chaotic little multiplayer games and playing them with your friends tonight. Rooms, lobbies, bots, game modes that snap in. Coming soon.">
+<meta property="og:title" content="friendslop">
+<meta property="og:description" content="Make a dumb game tonight. Play it with your friends by midnight.">
+<meta property="og:url" content="https://friendslop.us/">
+<meta name="theme-color" content="#c9c7be">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='16' height='16' fill='%23ff00dc'/%3E%3Crect x='16' y='16' width='16' height='16' fill='%23ff00dc'/%3E%3Crect x='16' width='16' height='16' fill='%23000'/%3E%3Crect y='16' width='16' height='16' fill='%23000'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #c9c7be;
+    --grid-minor: rgba(60, 56, 46, .10);
+    --grid-major: rgba(242, 140, 40, .55);
+    --ink: #22201c;
+    --ink-soft: #4a463d;
+    --panel: #f3f1ea;
+    --panel-edge: #22201c;
+    --accent: #f28c28;
+    --red: #d93a2b;
+    --blu: #2e5bd8;
+    --missing: #ff00dc;
+    --shadow: #22201c;
+    --toast-bg: #22201c;
+    --toast-ink: #f3f1ea;
+  }
+  :root[data-theme="lan"] {
+    --bg: #131a2c;
+    --grid-minor: rgba(150, 170, 230, .07);
+    --grid-major: rgba(255, 196, 61, .28);
+    --ink: #eef1fb;
+    --ink-soft: #aab3cf;
+    --panel: #1d2640;
+    --panel-edge: #8fa3e6;
+    --accent: #ffc43d;
+    --red: #ff5a4e;
+    --blu: #5b8cff;
+    --shadow: #05070d;
+    --toast-bg: #ffc43d;
+    --toast-ink: #131a2c;
+  }
+  :root[data-theme="missing"] {
+    --bg: #000;
+    --grid-minor: rgba(255, 0, 220, .0);
+    --grid-major: rgba(255, 0, 220, .0);
+    --ink: #fff;
+    --ink-soft: #ffd6f8;
+    --panel: #000;
+    --panel-edge: #ff00dc;
+    --accent: #ff00dc;
+    --red: #ff3b3b;
+    --blu: #3b8bff;
+    --shadow: #ff00dc;
+    --toast-bg: #ff00dc;
+    --toast-ink: #000;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(var(--grid-major) 2px, transparent 2px),
+      linear-gradient(90deg, var(--grid-major) 2px, transparent 2px),
+      linear-gradient(var(--grid-minor) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
+    background-size: 128px 128px, 128px 128px, 32px 32px, 32px 32px;
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.55;
+    transition: background-color .25s, color .25s;
+  }
+  :root[data-theme="missing"] body {
+    background-image:
+      conic-gradient(#ff00dc 25%, #000 0 50%, #ff00dc 0 75%, #000 0);
+    background-size: 96px 96px;
+  }
+  :root[data-theme="missing"] main,
+  :root[data-theme="missing"] footer { background: #000; }
+
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+  .wrap { width: min(1120px, 100% - 32px); margin-inline: auto; }
+
+  /* top bar */
+  .bar {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap;
+    padding-block: 20px;
+  }
+  .logo {
+    font-family: "Bungee", system-ui, sans-serif;
+    font-size: 1.5rem; letter-spacing: .02em; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .logo-cube {
+    width: 28px; height: 28px; flex: none;
+    background: conic-gradient(var(--missing) 25%, #000 0 50%, var(--missing) 0 75%, #000 0);
+    background-size: 14px 14px;
+    border: 2px solid var(--ink);
+    transform: rotate(-8deg);
+  }
+  .themes { display: flex; gap: 6px; flex-wrap: wrap; }
+  .themes button {
+    font: 600 .9rem "Bricolage Grotesque", system-ui, sans-serif;
+    color: var(--ink); background: var(--panel);
+    border: 2px solid var(--panel-edge); border-radius: 999px;
+    padding: 6px 14px; cursor: pointer;
+  }
+  .themes button[aria-pressed="true"] { background: var(--ink); color: var(--panel); border-color: var(--ink); }
+
+  /* hero */
+  .hero {
+    display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center;
+    padding-block: 40px 72px;
+  }
+  .hero > * { min-width: 0; }
+  h1 {
+    font-family: "Bungee", system-ui, sans-serif; font-weight: 400;
+    font-size: clamp(2.3rem, 5.2vw, 4.4rem); line-height: .98;
+    margin: 0 0 24px; letter-spacing: -.01em;
+    text-shadow: 4px 4px 0 var(--accent);
+  }
+  .lede { font-size: 1.3rem; max-width: 34ch; margin: 0 0 28px; color: var(--ink-soft); }
+  .join {
+    display: flex; gap: 8px; flex-wrap: wrap; max-width: 30rem;
+  }
+  .join label { flex-basis: 100%; font-weight: 600; font-size: 1rem; }
+  .join input {
+    flex: 1 1 12rem; min-width: 0;
+    font: 400 1.25rem "Bungee", system-ui, sans-serif; letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 12px 14px; color: var(--ink); background: var(--panel);
+    border: 3px solid var(--panel-edge); border-radius: 10px;
+  }
+  .join input::placeholder { color: var(--ink-soft); opacity: .6; }
+  .btn {
+    font: 800 1.05rem "Bricolage Grotesque", system-ui, sans-serif;
+    padding: 12px 20px; cursor: pointer;
+    color: var(--panel); background: var(--ink);
+    border: 3px solid var(--ink); border-radius: 10px;
+    box-shadow: 4px 4px 0 var(--accent);
+    transition: transform .08s, box-shadow .08s;
+  }
+  .btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--accent); }
+  .join-reply { flex-basis: 100%; min-height: 1.6em; margin: 6px 0 0; font-weight: 600; }
+
+  /* lobby card: the one loud thing */
+  .lobby {
+    background: var(--panel);
+    border: 3px solid var(--panel-edge);
+    border-radius: 18px 6px 18px 6px;
+    box-shadow: 10px 10px 0 var(--shadow);
+    padding: 22px;
+    transform: rotate(1.2deg);
+  }
+  .lobby-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .room-code { font-family: "Bungee", system-ui, sans-serif; font-size: 1.9rem; line-height: 1; }
+  .room-meta { font-size: .95rem; color: var(--ink-soft); }
+  .teams { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
+  .team { border-radius: 10px; padding: 10px 12px 12px; color: #fff; }
+  .team.red { background: var(--red); }
+  .team.blu { background: var(--blu); }
+  .team h3 { margin: 0 0 6px; font: 400 1.05rem "Bungee", system-ui, sans-serif; display: flex; justify-content: space-between; }
+  .team ul { list-style: none; margin: 0; padding: 0; font-size: .98rem; }
+  .team li { padding: 3px 0; border-top: 1px dashed rgba(255,255,255,.35); }
+  .team li:first-child { border-top: 0; }
+  .team li.pending { opacity: 0; transform: translateX(-8px); }
+  .team li.in { opacity: 1; transform: none; transition: opacity .35s, transform .35s; }
+  .tag { font-size: .78rem; font-weight: 800; background: rgba(0,0,0,.22); border-radius: 6px; padding: 1px 6px; margin-left: 6px; }
+  .feed {
+    font-size: .95rem; color: var(--ink-soft);
+    border-top: 2px dashed var(--panel-edge); padding-top: 10px; margin-bottom: 16px;
+    min-height: 3.2em;
+  }
+  .feed p { margin: 0; }
+  .start { width: 100%; }
+
+  /* sections */
+  main section { padding-block: 56px; }
+  h2 {
+    font-family: "Bungee", system-ui, sans-serif; font-weight: 400;
+    font-size: clamp(1.7rem, 3.6vw, 2.5rem); line-height: 1.05; margin: 0 0 10px;
+  }
+  .section-lede { margin: 0 0 28px; max-width: 60ch; color: var(--ink-soft); }
+
+  .notes {
+    background: var(--panel); border: 3px solid var(--panel-edge); border-radius: 14px;
+    padding: 8px 24px; max-width: 760px;
+  }
+  .notes ul { list-style: none; margin: 0; padding: 0; }
+  .notes li { display: grid; grid-template-columns: 2.2rem 1fr; gap: 8px; padding: 16px 0; border-top: 2px dashed var(--grid-major); }
+  .notes li:first-child { border-top: 0; }
+  .notes .sym { font: 400 1.2rem "Bungee", system-ui, sans-serif; color: var(--accent); line-height: 1.4; }
+  .notes strong { display: block; font-weight: 800; }
+  .notes span.d { color: var(--ink-soft); font-size: 1.02rem; }
+
+  .modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .mode {
+    background: var(--panel); border: 3px solid var(--panel-edge);
+    padding: 20px; min-height: 210px; position: relative;
+  }
+  .mode:nth-child(1) { border-radius: 4px 20px 4px 20px; transform: rotate(-1deg); }
+  .mode:nth-child(2) { border-radius: 20px 4px 20px 4px; transform: rotate(.6deg); }
+  .mode h3 { font: 400 1.35rem "Bungee", system-ui, sans-serif; margin: 0 0 8px; }
+  .mode p { margin: 0; font-size: 1.02rem; color: var(--ink-soft); }
+  .status { display: inline-block; font-weight: 800; font-size: .9rem; border-radius: 6px; padding: 2px 8px; margin-bottom: 12px; }
+  .status.test { background: var(--accent); color: #22201c; }
+  .status.next { background: var(--blu); color: #fff; }
+  .status.you { background: #000; color: var(--missing); }
+  .mode.missing {
+    border-radius: 0; transform: rotate(-.4deg);
+    background:
+      linear-gradient(var(--panel), var(--panel)) padding-box,
+      conic-gradient(#ff00dc 25%, #000 0 50%, #ff00dc 0 75%, #000 0) border-box;
+    background-size: auto, 24px 24px;
+    border: 10px solid transparent;
+  }
+
+  .faq { max-width: 760px; }
+  .faq details { border-top: 3px solid var(--panel-edge); padding: 14px 0; }
+  .faq details:last-child { border-bottom: 3px solid var(--panel-edge); }
+  .faq summary { cursor: pointer; font-weight: 800; font-size: 1.2rem; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font-family: "Bungee", system-ui, sans-serif; color: var(--accent); }
+  .faq details[open] summary::after { content: "\2212"; }
+  .faq p { margin: 10px 0 0; color: var(--ink-soft); max-width: 62ch; }
+
+  footer { padding-block: 40px 56px; font-size: .98rem; color: var(--ink-soft); }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 3px solid var(--panel-edge); padding-top: 20px; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 140%);
+    background: var(--toast-bg); color: var(--toast-ink);
+    font-weight: 800; padding: 12px 18px; border-radius: 12px;
+    max-width: calc(100% - 32px); text-align: center;
+    visibility: hidden;
+    transition: transform .25s, visibility 0s .25s;
+  }
+  .toast.show { transform: translate(-50%, 0); visibility: visible; transition: transform .25s; }
+
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-top: 16px; }
+    .lobby { transform: none; }
+    .modes { grid-template-columns: 1fr; }
+    .mode { min-height: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
+    .team li.pending { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+<header class="wrap bar">
+  <a class="logo" href="#top" aria-label="friendslop home"><span class="logo-cube" aria-hidden="true"></span>friendslop</a>
+  <div class="themes" role="group" aria-label="Page theme">
+    <button type="button" data-set-theme="blockout" aria-pressed="true">Blockout</button>
+    <button type="button" data-set-theme="lan" aria-pressed="false">2am LAN</button>
+    <button type="button" data-set-theme="missing" aria-pressed="false">Missing texture</button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="wrap hero" aria-labelledby="hero-title">
+    <div>
+      <h1 id="hero-title">Make a dumb game tonight. Play it with your friends by midnight.</h1>
+      <p class="lede">friendslop is a kit for vibecoding small, chaotic multiplayer games. Rooms, lobbies, bots and hosting are already done, so you only build the fun part.</p>
+      <form class="join" id="join" autocomplete="off">
+        <label for="code">Got a room code?</label>
+        <input id="code" name="code" maxlength="9" placeholder="SLOP-0000" aria-describedby="join-reply">
+        <button class="btn" type="submit">Join room</button>
+        <p class="join-reply" id="join-reply" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <div class="lobby" aria-label="Example lobby">
+      <div class="lobby-head">
+        <div class="room-code" id="room-code">SLOP-4207</div>
+        <div class="room-meta">Password protected. Host picks the mode.</div>
+      </div>
+      <div class="teams">
+        <div class="team red">
+          <h3><span>Red</span><span id="red-score">0</span></h3>
+          <ul>
+            <li class="pending">the_host <span class="tag">host</span></li>
+            <li class="pending">xX_flagthief_Xx</li>
+            <li class="pending">bot_greg <span class="tag">bot</span></li>
+          </ul>
+        </div>
+        <div class="team blu">
+          <h3><span>Blu</span><span id="blu-score">0</span></h3>
+          <ul>
+            <li class="pending">bot_doug <span class="tag">bot</span></li>
+            <li class="pending">camper_supreme</li>
+            <li class="pending">you? <span class="tag">open slot</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="feed" id="feed" aria-live="polite"><p>Waiting for players.</p></div>
+      <button class="btn start" type="button" id="start">Start match</button>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="box-title">
+    <h2 id="box-title">What's in the box</h2>
+    <p class="section-lede">The boring parts of a multiplayer game, done once, so every new idea starts at the fun part.</p>
+    <div class="notes">
+      <ul>
+        <li><span class="sym" aria-hidden="true">#</span><div><strong>Rooms with a code and a password</strong><span class="d">Make a room, send the code to the group chat, keep the randoms out.</span></div></li>
+        <li><span class="sym" aria-hidden="true">&gt;</span><div><strong>A lobby where the host runs the show</strong><span class="d">Pick teams, see who's in, start the match when everyone stops talking.</span></div></li>
+        <li><span class="sym" aria-hidden="true">+</span><div><strong>Game modes that snap in</strong><span class="d">Each game is an add-on to the same foundation. Shooter today, something stupider tomorrow.</span></div></li>
+        <li><span class="sym" aria-hidden="true">@</span><div><strong>Bots that join like players</strong><span class="d">They fill empty slots, and they connect the same way people do, so your own code can drive one.</span></div></li>
+        <li><span class="sym" aria-hidden="true">~</span><div><strong>Host from your own PC</strong><span class="d">Share a link and friends join from anywhere, with no router settings to touch.</span></div></li>
+        <li><span class="sym" aria-hidden="true">*</span><div><strong>Runs in a browser</strong><span class="d">Your friends click a link. Nobody installs anything.</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="modes-title">
+    <h2 id="modes-title">Modes in the oven</h2>
+    <p class="section-lede">Low-poly on purpose. The mechanics get the attention, and nobody waits for textures.</p>
+    <div class="modes">
+      <article class="mode">
+        <span class="status test">In testing</span>
+        <h3>Capture the flag</h3>
+        <p>First person, two teams, one map. Grab their flag, bring it home, try not to get shot on the way.</p>
+      </article>
+      <article class="mode">
+        <span class="status next">Up next</span>
+        <h3>Control points</h3>
+        <p>A long map, a line of points to fight over and a lot more bots. Ten a side, whether your friends show up or not.</p>
+      </article>
+      <article class="mode missing">
+        <span class="status you">Texture not found</span>
+        <h3>Your idea here</h3>
+        <p>The whole point. Describe a game, build it on the kit, and have it in the lobby the same night.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="faq-title">
+    <h2 id="faq-title">Questions people keep asking</h2>
+    <div class="faq">
+      <details>
+        <summary>Can I play it yet?</summary>
+        <p>Not yet. It's being built right now. Bookmark this page and check back.</p>
+      </details>
+      <details>
+        <summary>What does friendslop mean?</summary>
+        <p>The kind of cheap, messy co-op game that's only fun because your friends are in it. That's the whole genre this is for.</p>
+      </details>
+      <details>
+        <summary>Will it be free?</summary>
+        <p>The plan is a free, open kit you host yourself. No store page, no account to make.</p>
+      </details>
+      <details>
+        <summary>Why does one theme look broken?</summary>
+        <p>That's the missing-texture checkerboard every game developer has seen at 3am. It felt right.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>friendslop.us</span>
+    <span>Coming soon. Built by one person and a lot of bots.</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  // theme, remembered per viewer when storage works
+  var buttons = document.querySelectorAll("[data-set-theme]");
+  function setTheme(name) {
+    root.setAttribute("data-theme", name);
+    buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.setTheme === name)); });
+    try { localStorage.setItem("friendslop-theme", name); } catch (e) {}
+  }
+  buttons.forEach(function (b) { b.addEventListener("click", function () { setTheme(b.dataset.setTheme); }); });
+  try {
+    var saved = localStorage.getItem("friendslop-theme");
+    if (saved && document.querySelector('[data-set-theme="' + saved + '"]')) setTheme(saved);
+  } catch (e) {}
+
+  // a fresh room code each visit
+  var code = "SLOP-" + String(Math.floor(1000 + Math.random() * 9000));
+  document.getElementById("room-code").textContent = code;
+
+  // toast
+  var toast = document.getElementById("toast"), toastTimer;
+  function say(msg) {
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 2800);
+  }
+
+  // players join once, on load
+  var feed = document.getElementById("feed");
+  var joins = [
+    "the_host made the room.",
+    "bot_doug joined Blu.",
+    "xX_flagthief_Xx joined Red.",
+    "camper_supreme joined Blu and immediately went to a corner.",
+    "bot_greg joined Red.",
+    "One slot left. It has your name on it."
+  ];
+  var order = [0, 3, 1, 4, 2, 5];
+  var items = document.querySelectorAll(".team li");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  order.forEach(function (idx, step) {
+    setTimeout(function () {
+      items[idx].classList.add("in");
+      feed.innerHTML = "<p></p>";
+      feed.firstChild.textContent = joins[step];
+    }, reduce ? 0 : 500 + step * 650);
+  });
+
+  // start match
+  var startLines = [
+    "Can't start: the host is still building the map.",
+    "Can't start: bot_greg is stuck in a wall.",
+    "Can't start: someone has to be Blu.",
+    "Can't start: it isn't out yet. Soon."
+  ], startIdx = 0;
+  document.getElementById("start").addEventListener("click", function () {
+    say(startLines[startIdx % startLines.length]);
+    startIdx++;
+  });
+
+  // join form
+  var reply = document.getElementById("join-reply");
+  var input = document.getElementById("code");
+  document.getElementById("join").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var v = input.value.trim().toUpperCase();
+    if (!v) { reply.textContent = "Type a room code first. Ask the host for it."; input.focus(); return; }
+    if (v === code) { reply.textContent = "That's the room on this page. Nice reading. It opens at launch."; return; }
+    if (v === "FRIENDSLOP" || v === "SLOP") { reply.textContent = "Wrong password, right attitude."; return; }
+    reply.textContent = "Room " + v + " doesn't exist yet. Nothing does. Check back at launch.";
+  });
+})();
+</script>
+</body>
+</html>
