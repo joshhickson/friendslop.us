@@ -27,6 +27,28 @@
   var roomCode = document.getElementById("room-code");
   if (!roomCode) return;
 
+  // paste-a-link form: no network calls here, it only builds the address and goes there
+  var linkForm = document.getElementById("host-link");
+  if (linkForm) {
+    var linkInput = document.getElementById("game-link");
+    var linkReply = document.getElementById("host-link-reply");
+    linkForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var v = linkInput.value.trim();
+      if (!v) { linkReply.textContent = "Paste a link first. Open your game's folder on GitHub and copy the address bar."; linkInput.focus(); return; }
+      if (/^(www\.)?github\.com\//i.test(v)) v = "https://" + v;
+      var host = "";
+      try { host = new URL(v).hostname; } catch (err) {}
+      if (host !== "github.com" && host !== "www.github.com") {
+        linkReply.textContent = "That doesn't look like a GitHub link. Paste the address of a game folder on github.com.";
+        linkInput.focus();
+        return;
+      }
+      linkReply.textContent = "Taking you to play.friendslop.us. Nobody at friendslop has checked that game yet.";
+      window.location.assign("https://play.friendslop.us/?host=" + encodeURIComponent(v));
+    });
+  }
+
   // a fresh room code each visit
   var code = "SLOP-" + String(Math.floor(1000 + Math.random() * 9000));
   roomCode.textContent = code;

@@ -163,6 +163,12 @@ main section { padding-block: 56px; }
 }
 .join input::placeholder { color: var(--ink-soft); opacity: .6; }
 .join-reply { flex-basis: 100%; min-height: 1.6em; margin: 6px 0 0; font-weight: 600; }
+.join.link { margin-top: 20px; }
+.join.link input {
+  font: 600 1.05rem "Bricolage Grotesque", system-ui, sans-serif; letter-spacing: 0;
+  text-transform: none;
+}
+.join-note { flex-basis: 100%; margin: 0; font-size: 1rem; color: var(--ink-soft); }
 .hero-gh { margin: 8px 0 0; font-size: 1rem; color: var(--ink-soft); max-width: 36ch; }
 
 /* lobby card */

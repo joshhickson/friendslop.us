@@ -48,6 +48,13 @@
         <button class="btn" type="submit">Join room</button>
         <p class="join-reply" id="join-reply" role="status" aria-live="polite"></p>
       </form>
+      <form class="join link" id="host-link" action="https://play.friendslop.us/" method="get" autocomplete="off">
+        <label for="game-link">Got a game on GitHub?</label>
+        <input id="game-link" name="host" type="text" inputmode="url" spellcheck="false" placeholder="Link to your game folder" aria-describedby="host-link-note host-link-reply">
+        <button class="btn" type="submit">Host it</button>
+        <p class="join-reply" id="host-link-reply" role="status" aria-live="polite"></p>
+        <p class="join-note" id="host-link-note">Your game runs in the host's browser and friendslop only passes the messages along. Nobody reviews it first, so the host could change the score.</p>
+      </form>
       <p class="hero-gh">No room yet? <a href="https://github.com/joshhickson/friendslop">Watch the repo on GitHub</a> and you'll see the code the day it lands.</p>
     </div>
 
@@ -112,7 +119,7 @@
         <li><span class="sym" aria-hidden="true">#</span><div><strong>Rooms with a code and a password</strong><span class="d">Make a room, send the code to the group chat, keep the randoms out.</span></div></li>
         <li><span class="sym" aria-hidden="true">&gt;</span><div><strong>A lobby where the host runs the show</strong><span class="d">Pick teams, see who's in, start the match when everyone stops talking.</span></div></li>
         <li><span class="sym" aria-hidden="true">+</span><div><strong>Game modes that snap in</strong><span class="d">Each game is an add-on to the same foundation. Shooter today, something stupider tomorrow.</span></div></li>
-        <li><span class="sym" aria-hidden="true">!</span><div><strong>The server keeps score</strong><span class="d">Hits, flags and points are decided in one place, so nobody wins by editing their browser.</span></div></li>
+        <li><span class="sym" aria-hidden="true">!</span><div><strong>The host keeps score</strong><span class="d">The host's computer runs the game and our server passes the messages along, checking each one. So the host could change the score. Choose your friends carefully.</span></div></li>
         <li><span class="sym" aria-hidden="true">~</span><div><strong>Host from your own PC</strong><span class="d">Share a link and friends join from anywhere. Nothing is public until you share it.</span></div></li>
         <li><span class="sym" aria-hidden="true">*</span><div><strong>Runs in a browser</strong><span class="d">Your friends click a link. Nobody installs anything.</span></div></li>
       </ul>
