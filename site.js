@@ -1,18 +1,5 @@
-// friendslop.us: theme switcher on every page, plus the landing page's toys
+// friendslop.us: the toast and copy buttons on every page, plus the landing page's toys
 (function () {
-  var root = document.documentElement;
-
-  // theme, remembered per viewer when storage works
-  var buttons = document.querySelectorAll("[data-set-theme]");
-  function setTheme(name) {
-    root.setAttribute("data-theme", name);
-    buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.setTheme === name)); });
-    try { localStorage.setItem("friendslop-theme", name); } catch (e) {}
-  }
-  buttons.forEach(function (b) { b.addEventListener("click", function () { setTheme(b.dataset.setTheme); }); });
-  var current = root.getAttribute("data-theme") || "blockout";
-  buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.setTheme === current)); });
-
   // toast
   var toast = document.getElementById("toast"), toastTimer;
   function say(msg) {
@@ -39,7 +26,7 @@
       }
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(function () {
-          say("Copied. Paste it into your agent, then change the line in brackets.");
+          say("Copied. Paste it into your agent and it takes it from there.");
         }, selectIt);
       } else {
         selectIt();

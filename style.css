@@ -16,36 +16,6 @@
   --toast-bg: #22201c;
   --toast-ink: #f3f1ea;
 }
-:root[data-theme="lan"] {
-  --bg: #131a2c;
-  --grid-minor: rgba(150, 170, 230, .07);
-  --grid-major: rgba(255, 196, 61, .28);
-  --ink: #eef1fb;
-  --ink-soft: #aab3cf;
-  --panel: #1d2640;
-  --panel-edge: #8fa3e6;
-  --accent: #ffc43d;
-  --red: #ff5a4e;
-  --blu: #5b8cff;
-  --shadow: #05070d;
-  --toast-bg: #ffc43d;
-  --toast-ink: #131a2c;
-}
-:root[data-theme="missing"] {
-  --bg: #000;
-  --grid-minor: rgba(255, 0, 220, 0);
-  --grid-major: rgba(255, 0, 220, 0);
-  --ink: #fff;
-  --ink-soft: #ffd6f8;
-  --panel: #000;
-  --panel-edge: #ff00dc;
-  --accent: #ff00dc;
-  --red: #ff3b3b;
-  --blu: #3b8bff;
-  --shadow: #ff00dc;
-  --toast-bg: #ff00dc;
-  --toast-ink: #000;
-}
 
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -62,14 +32,7 @@ body {
   font-family: "Bricolage Grotesque", system-ui, sans-serif;
   font-size: 1.125rem;
   line-height: 1.55;
-  transition: background-color .25s, color .25s;
 }
-:root[data-theme="missing"] body {
-  background-image: conic-gradient(#ff00dc 25%, #000 0 50%, #ff00dc 0 75%, #000 0);
-  background-size: 96px 96px;
-}
-:root[data-theme="missing"] main,
-:root[data-theme="missing"] footer { background: #000; }
 
 a { color: inherit; }
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
@@ -107,14 +70,6 @@ a { color: inherit; }
 }
 .nav a:hover { border-bottom-color: var(--grid-major); }
 .nav a[aria-current="page"] { border-bottom-color: var(--accent); }
-.themes { display: flex; gap: 6px; flex-wrap: wrap; }
-.themes button {
-  font: 600 .9rem "Bricolage Grotesque", system-ui, sans-serif;
-  color: var(--ink); background: var(--panel);
-  border: 2px solid var(--panel-edge); border-radius: 999px;
-  padding: 6px 14px; cursor: pointer;
-}
-.themes button[aria-pressed="true"] { background: var(--ink); color: var(--panel); border-color: var(--ink); }
 .bar-right { display: flex; align-items: center; gap: 12px 20px; flex-wrap: wrap; }
 
 /* type */
@@ -304,6 +259,8 @@ main section { padding-block: 56px; }
 .build > div:first-child { border-left: 0; }
 .build h3 { font-size: 1.15rem; margin: 0 0 6px; }
 .build p { margin: 0; font-size: 1.02rem; color: var(--ink-soft); }
+.build-note { margin: 18px 0 0; font-size: 1rem; color: var(--ink-soft); max-width: 60ch; }
+.build-note a { color: var(--ink); font-weight: 800; text-underline-offset: 3px; text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
 
 /* faq */
 .faq { max-width: 760px; }
