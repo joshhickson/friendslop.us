@@ -55,7 +55,7 @@
         <p class="join-reply" id="host-link-reply" role="status" aria-live="polite"></p>
         <p class="join-note" id="host-link-note">Your game runs in the host's browser and friendslop only passes the messages along. Nobody reviews it first, so the host could change the score.</p>
       </form>
-      <p class="hero-gh">No game yet? Fork <a href="https://github.com/joshhickson/friendslop">the repo on GitHub</a>, build one on the starter, and paste its folder link above.</p>
+      <p class="hero-gh">No game yet? <a href="#make">Here's how to make one</a>, by hand or with your AI coding agent.</p>
     </div>
 
     <div class="lobby" aria-label="Example lobby">
@@ -91,22 +91,56 @@
     <p>Multiplayer is usually where a game idea dies: rooms, lobbies, netcode, hosting and cheaters. friendslop does that part once, for every game you make.</p>
   </section>
 
-  <section class="wrap" aria-labelledby="how-title">
-    <h2 id="how-title">How it works</h2>
-    <p class="section-lede">Each game is one folder with clear places for your rules. Everything else is already there.</p>
-    <ol class="steps">
+  <section class="wrap" id="make" aria-labelledby="make-title">
+    <h2 id="make-title">Make your first game</h2>
+    <p class="section-lede">You need a free GitHub account, Git and Node.js 20 or newer. Your game lives in your own copy of the friendslop repo, and the link to its folder is all your friends need.</p>
+
+    <div class="prompt">
+      <div class="prompt-head">
+        <h3>Hand it to your AI agent</h3>
+        <p>Paste this into Claude Code, Cursor or any coding agent that can run commands. Change the line in brackets to your idea first.</p>
+      </div>
+      <pre class="prompt-text" id="agent-prompt">Set me up to make a multiplayer game with friendslop.
+
+1. Fork https://github.com/joshhickson/friendslop to my GitHub
+   account and clone my fork. With the GitHub CLI that's:
+   gh repo fork joshhickson/friendslop --clone
+   If you can't fork it, tell me to press Fork on GitHub.
+2. Read docs/making-a-game.md before writing any code.
+3. In the clone, run: npm run new-game -- my-game "My Game"
+4. Build this game in games/my-game:
+   [It's tag, but the floor is lava and the bots cheat.]
+5. Run npm run play and check it in two browser windows.
+6. Commit and push to my fork.
+7. Give me the link to the game folder. It looks like
+   https://github.com/MY-USERNAME/friendslop/tree/main/games/my-game</pre>
+      <button class="btn" type="button" data-copy="agent-prompt">Copy the prompt</button>
+    </div>
+
+    <h3 class="make-or">Or do it yourself</h3>
+    <ol class="steps four">
+      <li>
+        <h3>Fork it</h3>
+        <p>Press <strong>Fork</strong> on <a href="https://github.com/joshhickson/friendslop">the friendslop repo</a>, then copy your fork to your computer.</p>
+        <code class="cmd">git clone https://github.com/YOU/friendslop
+cd friendslop</code>
+      </li>
       <li>
         <h3>Start a game</h3>
-        <p>You get a working folder with rooms, a lobby and teams already wired up.</p>
+        <p>This makes <strong>games/my-game</strong> from the starter, a room where everyone is a dot, and opens it in your browser. Open a second window to play against yourself.</p>
+        <code class="cmd">npm run new-game -- my-game "My Game"
+npm run play</code>
       </li>
       <li>
         <h3>Add your rules</h3>
-        <p>Write the part that makes your game yours, and skip the networking entirely.</p>
-        <span class="say">"It's tag, but the floor is lava and the bots cheat."</span>
+        <p>The rules go in <strong>server.js</strong> and the screen in <strong>client/index.js</strong>. Rooms, lobby, teams and networking are already done. <a href="https://github.com/joshhickson/friendslop/blob/main/docs/making-a-game.md">The game guide</a> shows where everything goes.</p>
       </li>
       <li>
-        <h3>Send the link</h3>
-        <p>Friends click it and land in your lobby. No installs, no accounts, no router settings.</p>
+        <h3>Push and paste</h3>
+        <p>Push to your fork, open the game's folder on GitHub and copy the address. Paste it into <a href="#host-link">Got a game on GitHub?</a> at the top and send your friends the room link.</p>
+        <code class="cmd">git add games/my-game
+git commit -m "My game"
+git push</code>
       </li>
     </ol>
   </section>
@@ -165,14 +199,14 @@
       <article class="callout">
         <h3>Easy to build with AI</h3>
         <p>One folder per game with clear hooks means coding tools like Claude Code or Cursor know where your rules go, if you'd rather describe a game than type it.</p>
-        <p class="more"><a href="/docs/">What the docs will cover</a></p>
+        <p class="more"><a href="#make">Copy the agent prompt</a></p>
       </article>
     </div>
   </section>
 
   <section class="wrap" aria-labelledby="build-title">
     <h2 id="build-title">Follow the build</h2>
-    <p class="section-lede">Everything happens in one public repo. The alpha is in testing, and the code goes up when it's ready.</p>
+    <p class="section-lede">Everything happens in one public repo. The alpha is out, and new code lands there first.</p>
     <div class="build">
       <div>
         <h3>Watch the repo</h3>
@@ -194,7 +228,7 @@
     <div class="faq">
       <details>
         <summary>Can I play it yet?</summary>
-        <p>Yes, if you have a game. The kit and the rooms are live and the games are yours to make. Fork <a href="https://github.com/joshhickson/friendslop">the repo on GitHub</a>, build one on the starter, and paste its folder link into the box at the top. Your friends get a room link and nobody installs anything.</p>
+        <p>Yes, if you have a game. The kit and the rooms are live and the games are yours to make. <a href="#make">Make one on the starter</a>, push it to your fork and paste its folder link into the box at the top. Your friends get a room link and nobody installs anything.</p>
       </details>
       <details>
         <summary>Do I have to use JavaScript?</summary>
@@ -206,11 +240,11 @@
       </details>
       <details>
         <summary>Will it be free?</summary>
-        <p>Yes. It's a free, open kit under the Apache-2.0 license, and you host it yourself. No store page, no account to make.</p>
+        <p>Yes. The kit is free and open under the Apache-2.0 license, and rooms on play.friendslop.us cost nothing. You need a free GitHub account to share a game. Your friends need nothing but the link.</p>
       </details>
       <details>
         <summary>Can I build with an AI coding tool?</summary>
-        <p>Yes, and it's a good fit. A game is one folder with clear hooks and a guide to read, so tools like Claude Code or Cursor know where your rules go.</p>
+        <p>Yes, and it's a good fit. A game is one folder with clear hooks and a guide to read, so tools like Claude Code or Cursor know where your rules go. <a href="#make">Copy the agent prompt</a> to get started.</p>
       </details>
       <details>
         <summary>Why does one theme look broken?</summary>

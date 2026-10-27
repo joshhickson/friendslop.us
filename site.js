@@ -23,6 +23,30 @@
     toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 2800);
   }
 
+  // copy buttons: data-copy names the element whose text goes on the clipboard
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var el = document.getElementById(b.dataset.copy);
+      if (!el) return;
+      var text = el.textContent;
+      function selectIt() {
+        var r = document.createRange();
+        r.selectNodeContents(el);
+        var s = window.getSelection();
+        s.removeAllRanges();
+        s.addRange(r);
+        say("Selected. Press Ctrl+C (or Cmd+C) to copy it.");
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          say("Copied. Paste it into your agent, then change the line in brackets.");
+        }, selectIt);
+      } else {
+        selectIt();
+      }
+    });
+  });
+
   // landing page only from here on
   var roomCode = document.getElementById("room-code");
   if (!roomCode) return;

@@ -226,7 +226,24 @@ main section { padding-block: 56px; }
   transform: rotate(-6deg);
 }
 .steps p { margin: 0; color: var(--ink-soft); font-size: 1.02rem; }
-.steps .say { display: block; margin-top: 10px; font-weight: 800; color: var(--ink); }
+.steps p a, .prompt-head a { color: var(--ink); font-weight: 800; text-underline-offset: 3px; text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
+.steps.four { grid-template-columns: repeat(2, 1fr); gap: 36px 20px; max-width: 960px; }
+
+/* make your first game: commands and the agent prompt */
+.cmd, .prompt-text {
+  display: block; white-space: pre-wrap; overflow-wrap: anywhere;
+  font: 500 .92rem/1.55 ui-monospace, "Cascadia Mono", Consolas, monospace;
+  background: var(--ink); color: var(--panel);
+  border-radius: 10px; padding: 12px 14px; margin: 14px 0 0;
+}
+.prompt {
+  background: var(--panel); border: 3px solid var(--panel-edge); border-radius: 6px 22px 6px 22px;
+  box-shadow: 8px 8px 0 var(--accent);
+  padding: 24px; max-width: 960px; margin-bottom: 48px;
+}
+.prompt-head p { margin: 0; color: var(--ink-soft); max-width: 60ch; }
+.prompt-text { margin: 16px 0 18px; font-size: .95rem; }
+.make-or { font-size: 1.5rem; margin: 0 0 34px; }
 
 /* callouts: one per big idea, each leading to its own page */
 .callouts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -382,7 +399,9 @@ footer nav { display: flex; gap: 6px 16px; flex-wrap: wrap; }
 @media (max-width: 860px) {
   .hero { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-top: 16px; }
   .lobby { transform: none; }
-  .cards, .steps, .callouts, .roadmap, .split { grid-template-columns: 1fr; }
+  .cards, .steps, .steps.four, .callouts, .roadmap, .split { grid-template-columns: 1fr; }
+  .prompt { padding: 18px; box-shadow: 5px 5px 0 var(--accent); }
+  .prompt-text, .cmd { font-size: .82rem; padding: 10px 12px; }
   .steps { gap: 36px; }
   .card { min-height: 0; }
   .build { grid-template-columns: 1fr; }
