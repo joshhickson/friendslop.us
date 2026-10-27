@@ -86,15 +86,24 @@
     startIdx++;
   });
 
-  // join form
+  // join form: no network calls here either, it only checks the code's shape and goes there
+  // The game server's room code alphabet (ROOM_ID_ALPHABET): no 0, O, 1, I or L.
+  var ROOM_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+  function isRoomCode(v) {
+    if (v.length !== 6) return false;
+    for (var i = 0; i < v.length; i++) if (ROOM_ALPHABET.indexOf(v.charAt(i)) < 0) return false;
+    return true;
+  }
   var reply = document.getElementById("join-reply");
   var input = document.getElementById("code");
   document.getElementById("join").addEventListener("submit", function (e) {
     e.preventDefault();
-    var v = input.value.trim().toUpperCase();
+    var v = input.value.replace(/\s+/g, "").toUpperCase();
     if (!v) { reply.textContent = "Type a room code first. Ask the host for it."; input.focus(); return; }
-    if (v === code) { reply.textContent = "That's the room on this page. Nice reading. It opens at launch."; return; }
-    if (v === "FRIENDSLOP" || v === "SLOP") { reply.textContent = "Wrong password, right attitude."; return; }
-    reply.textContent = "Room " + v + " doesn't exist yet. Nothing does. Check back at launch.";
+    if (v === "SLOP") { reply.textContent = "Wrong password, right attitude."; return; }
+    if (v.indexOf("SLOP") === 0) { reply.textContent = "That's the pretend room in the picture. Real room codes are six letters and numbers, and the host has yours."; input.focus(); return; }
+    if (!isRoomCode(v)) { reply.textContent = "Room codes are six letters and numbers, like K7QX2M. Check the one the host sent and try again."; input.focus(); return; }
+    reply.textContent = "Taking you to room " + v + " on play.friendslop.us.";
+    window.location.assign("https://play.friendslop.us/?room=" + v);
   });
 })();
