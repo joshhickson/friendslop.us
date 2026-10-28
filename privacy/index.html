@@ -10,9 +10,6 @@
 <meta property="og:url" content="https://friendslop.us/privacy/">
 <meta name="theme-color" content="#c9c7be">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='16' height='16' fill='%23ff00dc'/%3E%3Crect x='16' y='16' width='16' height='16' fill='%23ff00dc'/%3E%3Crect x='16' width='16' height='16' fill='%23000'/%3E%3Crect y='16' width='16' height='16' fill='%23000'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -43,7 +40,7 @@
     <ul>
       <li>The name you type is shown to the other players in your room and saved in your own browser.</li>
       <li>Rooms, passwords, chat and scores live in the server's memory while the room is open, and are gone when it closes.</li>
-      <li>Your IP address is used to slow down spam and password guessing. The server's log records the IP address of whoever creates a room, and those logs are kept for seven days.</li>
+      <li>Your IP address is used, in memory only, to slow down spam and password guessing. The server never writes it to its log.</li>
       <li>Games shared by link are made by other people. A game can see your IP address, the way any website can.</li>
       <li>Nothing is sold, shared for advertising or used to build a profile of you.</li>
     </ul>
@@ -58,11 +55,7 @@
   <section class="wrap page-body doc" aria-labelledby="site-title">
     <h2 id="site-title">friendslop.us</h2>
     <p>This site is a set of plain pages. It sets no cookies, runs no analytics and has no forms that send anything to us. The room code box and the game link box only send you to play.friendslop.us with what you typed in the address.</p>
-    <p>Two outside services see your visit:</p>
-    <ul>
-      <li><strong>GitHub Pages</strong> serves the pages, and GitHub logs requests for security under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">its privacy statement</a>.</li>
-      <li><strong>Google Fonts</strong> serves the two typefaces, so your browser sends your IP address and browser details to Google. Google describes what it does with them in <a href="https://developers.google.com/fonts/faq/privacy">its Fonts privacy notes</a>.</li>
-    </ul>
+    <p>Everything on it, the fonts included, comes from this one site. <strong>GitHub Pages</strong> serves it, and GitHub logs requests for security under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">its privacy statement</a>.</p>
   </section>
 
   <section class="wrap page-body doc" aria-labelledby="play-title">
@@ -75,8 +68,8 @@
     <h3>What it keeps, and for how long</h3>
     <ul>
       <li><strong>Rooms, teams, scores and stats</strong> stay in memory until the room closes, either when its last person leaves or after it sits idle. A restart of the server clears everything.</li>
-      <li><strong>Your IP address</strong> is held in memory to limit how many connections and rooms one address can open and to lock out repeated wrong passwords. Those counters clear themselves within minutes.</li>
-      <li><strong>The server's log</strong> records when a room is created, with the room code, the game, whether it has a password and the creator's IP address. It also records when matches start and end, and the result line, which can include a player's name. The service that hosts the server keeps these logs for seven days.</li>
+      <li><strong>Your IP address</strong> is held in memory to limit how many connections and rooms one address can open and to lock out repeated wrong passwords. Those counters clear themselves within minutes, and the address is never written to the log.</li>
+      <li><strong>The server's log</strong> records when a room is created, with the room code, the game and whether it has a password. It also records when matches start and end, and the result line, which can include a player's name. The service that hosts the server keeps these logs for seven days.</li>
       <li><strong>A daily traffic total</strong> for the whole server, with no per-person detail.</li>
     </ul>
     <h3>What it saves in your browser</h3>
@@ -107,9 +100,8 @@
       <li><a href="https://www.cloudflare.com/privacypolicy/">Cloudflare</a> carries Render's traffic, and routes email sent to the contact address.</li>
       <li><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub</a> hosts this site, the code and the issues.</li>
       <li><a href="https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net">jsDelivr</a> serves the files of games shared by link.</li>
-      <li><a href="https://policies.google.com/privacy">Google</a> serves this site's fonts. The play app serves its own.</li>
     </ul>
-    <p>Each keeps its own logs under its own policy.</p>
+    <p>Each keeps its own logs under its own policy. Render and Cloudflare carry every connection to the game server, so their records can include your IP address even though friendslop's own log does not.</p>
   </section>
 
   <section class="wrap page-body doc" aria-labelledby="talk-title">
@@ -124,7 +116,7 @@
 
   <section class="wrap page-body doc" aria-labelledby="ask-title">
     <h2 id="ask-title">Asking, and changes</h2>
-    <p>You can ask what we hold about you, or ask for it to be deleted, at <a href="mailto:contact@joshuahickson.org">contact@joshuahickson.org</a>. Since there are no accounts, the most there will be is a log line from the last seven days or an email you sent.</p>
+    <p>You can ask what we hold about you, or ask for it to be deleted, at <a href="mailto:contact@joshuahickson.org">contact@joshuahickson.org</a>. Since there are no accounts, the most there will be is a match result with your name in it from the last seven days, or an email you sent.</p>
     <p>When this page changes, the date at the top changes too, and every earlier version is in <a href="https://github.com/joshhickson/friendslop.us/commits/main/privacy/index.html">the site's history on GitHub</a>.</p>
   </section>
 </main>
