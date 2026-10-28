@@ -36,6 +36,11 @@
     <div>
       <h1 id="hero-title">Multiplayer in one command. Arguments in two minutes.</h1>
       <p class="lede">friendslop is a kit for making small, chaotic multiplayer games. Rooms, lobbies, bots and hosting are already done, so you only build the fun part.</p>
+      <div class="hero-go">
+        <a class="btn" href="https://play.friendslop.us/?host=https://github.com/joshhickson/friendslop/tree/main/games/cp">Play the demo</a>
+        <a class="btn ghost" href="#make">Make your own game</a>
+        <p class="hero-go-note">The demo is Control Points, ten a side in your browser. Bots take every empty seat, so you can play alone or send your friends the room link. You need a keyboard and mouse.</p>
+      </div>
       <form class="join" id="join" autocomplete="off">
         <label for="code">Got a room code?</label>
         <input id="code" name="code" maxlength="8" placeholder="K7QX2M" autocapitalize="characters" spellcheck="false" aria-describedby="join-reply">
@@ -49,7 +54,6 @@
         <p class="join-reply" id="host-link-reply" role="status" aria-live="polite"></p>
         <p class="join-note" id="host-link-note">Your game runs in the host's browser and friendslop only passes the messages along. Nobody reviews it first, so the host could change the score.</p>
       </form>
-      <p class="hero-gh">No game yet? <a href="#make">Here's how to make one</a>, by hand or with your AI coding agent.</p>
     </div>
 
     <div class="lobby" aria-label="Example lobby">
@@ -156,13 +160,14 @@ git push</code>
   </section>
 
   <section class="wrap" aria-labelledby="modes-title">
-    <h2 id="modes-title">Modes in the oven</h2>
+    <h2 id="modes-title">Games so far</h2>
     <p class="section-lede">Low-poly on purpose. The mechanics get the attention, and nobody waits for textures. <a href="/games/">See all games</a></p>
     <div class="cards">
       <article class="card">
-        <span class="status next">Up next</span>
+        <span class="status live">Live</span>
         <h3>Control points</h3>
-        <p>A long map, a line of points to fight over and a lot more bots. Ten a side, whether your friends show up or not.</p>
+        <p>A long map, a line of points to fight over and a lot of bots. Ten a side, whether your friends show up or not. A match runs about 15 minutes.</p>
+        <p><a href="https://play.friendslop.us/?host=https://github.com/joshhickson/friendslop/tree/main/games/cp">Play the demo</a> or <a href="https://github.com/joshhickson/friendslop/tree/main/games/cp">read its code</a>.</p>
       </article>
       <article class="card missing">
         <span class="status you">Texture not found</span>
@@ -219,7 +224,7 @@ git push</code>
     <div class="faq">
       <details>
         <summary>Can I play it yet?</summary>
-        <p>Yes, if you have a game. The kit and the rooms are live and the games are yours to make. <a href="#make">Make one on the starter</a>, push it to your fork and paste its folder link into the box at the top. Your friends get a room link and nobody installs anything.</p>
+        <p>Yes. <a href="https://play.friendslop.us/?host=https://github.com/joshhickson/friendslop/tree/main/games/cp">The Control Points demo</a> is live, and bots fill the empty seats. To play a game of your own, <a href="#make">make one on the starter</a>, push it to your fork and paste its folder link into the box at the top. Your friends get a room link and nobody installs anything.</p>
       </details>
       <details>
         <summary>Do I have to use JavaScript?</summary>

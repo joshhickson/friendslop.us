@@ -40,7 +40,7 @@ a { color: inherit; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* links inside running text */
-.prose-link, .section-lede a, .callout a, .card p a, .build a, .faq a, .hero-gh a, .roadmap a, .page-body a {
+.prose-link, .section-lede a, .callout a, .card p a, .build a, .faq a, .hero-go-note a, .roadmap a, .page-body a {
   color: var(--ink); font-weight: 800;
   text-underline-offset: 3px; text-decoration-color: var(--accent); text-decoration-thickness: 2px;
 }
@@ -124,7 +124,9 @@ main section { padding-block: 56px; }
   text-transform: none;
 }
 .join-note { flex-basis: 100%; margin: 0; font-size: 1rem; color: var(--ink-soft); }
-.hero-gh { margin: 8px 0 0; font-size: 1rem; color: var(--ink-soft); max-width: 36ch; }
+.hero-go { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; margin: 0 0 36px; }
+.hero-go .btn { font-size: 1.15rem; padding: 14px 24px; }
+.hero-go-note { flex-basis: 100%; margin: 0; font-size: 1rem; color: var(--ink-soft); max-width: 44ch; }
 
 /* lobby card */
 .lobby {
@@ -235,7 +237,9 @@ main section { padding-block: 56px; }
 .cards .card:nth-child(3n+2) { border-radius: 20px 4px 20px 4px; transform: rotate(.6deg); }
 .cards .card:nth-child(3n) { border-radius: 10px; transform: rotate(-.3deg); }
 .card p { margin: 0; font-size: 1.02rem; color: var(--ink-soft); }
+.card p + p { margin-top: 12px; }
 .status { display: inline-block; font-weight: 800; font-size: .9rem; border-radius: 6px; padding: 2px 8px; margin-bottom: 12px; }
+.status.live { background: var(--red); color: #fff; }
 .status.test { background: var(--accent); color: #22201c; }
 .status.next { background: var(--blu); color: #fff; }
 .status.later { background: var(--ink); color: var(--panel); }
@@ -370,3 +374,27 @@ footer nav { display: flex; gap: 6px 16px; flex-wrap: wrap; }
   *, *::before, *::after { transition: none !important; }
   .team li.pending { opacity: 1; transform: none; }
 }
+
+/* docs page */
+.toc { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; margin: 0; padding: 0; max-width: 960px; }
+.toc a {
+  display: inline-block; padding: 6px 12px; text-decoration: none; font-weight: 800;
+  background: var(--panel); border: 3px solid var(--panel-edge); border-radius: 8px;
+}
+.toc a:hover { box-shadow: 3px 3px 0 var(--accent); }
+main section.doc { padding-block: 36px; }
+.doc .steps { margin-top: 18px; }
+.page-body ul, .page-body .doc-list { margin: 0 0 16px; padding-left: 1.3em; max-width: 62ch; }
+.page-body li { margin: 6px 0; }
+.page-body .cmd { max-width: 62ch; margin: 0 0 16px; }
+.page-body h3 { margin-top: 28px; }
+.page-body li a, .doc-more a { color: var(--ink); font-weight: 800; text-underline-offset: 3px; text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
+.doc-more { margin: 20px 0 0; max-width: 62ch; }
+.doc-go { margin: 4px 0 20px; }
+.page-body p code, .page-body li code, .panel code, .section-lede code {
+  font: 600 .9em ui-monospace, "Cascadia Mono", Consolas, monospace;
+  background: rgba(34, 32, 28, .08); border-radius: 5px; padding: 1px 5px; overflow-wrap: anywhere;
+}
+.panel h3 { margin-bottom: 10px; }
+.panel ul { margin-bottom: 10px; }
+.page-body a.btn { color: var(--panel); text-decoration: none; }

@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Docs | friendslop</title>
-<meta name="description" content="Getting started with friendslop. The docs land with the first code drop.">
+<meta name="description" content="Make a multiplayer game on friendslop and play it with your friends: setup, the agent prompt, where your rules go, sharing by link, bots and hosting.">
 <meta property="og:title" content="Docs | friendslop">
-<meta property="og:description" content="Getting started with friendslop. The docs land with the first code drop.">
+<meta property="og:description" content="Make a multiplayer game on friendslop and play it with your friends tonight.">
 <meta property="og:url" content="https://friendslop.us/docs/">
 <meta name="theme-color" content="#c9c7be">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='16' height='16' fill='%23ff00dc'/%3E%3Crect x='16' y='16' width='16' height='16' fill='%23ff00dc'/%3E%3Crect x='16' width='16' height='16' fill='%23000'/%3E%3Crect y='16' width='16' height='16' fill='%23000'/%3E%3C/svg%3E">
@@ -32,45 +32,184 @@
 </header>
 
 <main>
-<section class="wrap page-hero">
-    <span class="soon">Coming soon</span>
+  <section class="wrap page-hero">
     <h1>Docs</h1>
-    <p class="lede">The docs land with the first code drop. Until then, the <a class="prose-link" href="https://github.com/joshhickson/friendslop">README on GitHub</a> is the source of truth.</p>
+    <p class="lede">Make a multiplayer game on friendslop and play it with your friends tonight. This page gets you from nothing to a room link. <a class="prose-link" href="https://github.com/joshhickson/friendslop/blob/main/docs/making-a-game.md">The game guide on GitHub</a> has every detail.</p>
+    <nav aria-label="On this page">
+      <ul class="toc">
+        <li><a href="#demo">Try the demo</a></li>
+        <li><a href="#start">Getting started</a></li>
+        <li><a href="#agent">With your AI agent</a></li>
+        <li><a href="#folder">A game folder</a></li>
+        <li><a href="#rules">Where your rules go</a></li>
+        <li><a href="#share">Share it with a link</a></li>
+        <li><a href="#bots">Bots</a></li>
+        <li><a href="#own-pc">Hosting from your PC</a></li>
+        <li><a href="#trust">Who keeps score</a></li>
+      </ul>
+    </nav>
   </section>
 
-  <section class="wrap" aria-label="Planned docs">
-    <div class="cards">
-      <article class="card">
-        <span class="status later">Planned</span>
-        <h3>Getting started</h3>
-        <p>From nothing to a room your friends can join, in one command and a link.</p>
-      </article>
-      <article class="card">
-        <span class="status later">Planned</span>
-        <h3>Making a game</h3>
-        <p>How a game folder is laid out, what the framework already does for you, and where your rules go.</p>
-      </article>
-      <article class="card">
-        <span class="status later">Planned</span>
-        <h3>Working with your AI tool</h3>
-        <p>How to point Claude Code, Cursor or anything else at friendslop so it builds in the right places.</p>
-      </article>
-      <article class="card">
-        <span class="status later">Planned</span>
-        <h3>Hosting for friends</h3>
-        <p>Sharing a room with people on other networks, and keeping your PC closed while you do.</p>
-      </article>
-      <article class="card">
-        <span class="status later">Planned</span>
-        <h3>Writing a bot</h3>
-        <p>Joining a room from your own program, in any language.</p>
-      </article>
-      <article class="card">
-        <span class="status later">Planned</span>
-        <h3>The protocol</h3>
-        <p>Every message a room understands. See the <a href="/protocol/">protocol page</a> for the plan.</p>
-      </article>
+  <section class="wrap page-body doc" id="demo" aria-labelledby="demo-title">
+    <h2 id="demo-title">Try the demo</h2>
+    <p>Control Points is a ten a side shooter built on friendslop, and the quickest way to see what a game gets for free: the lobby, teams, bots, the scoreboard, chat and the Esc menu. Open it, pick a name and press <strong>Host this game</strong>, then <strong>Start match</strong>. Bots fill both teams, and friends can join from the room link. You need a keyboard and mouse.</p>
+    <p class="doc-go"><a class="btn" href="https://play.friendslop.us/?host=https://github.com/joshhickson/friendslop/tree/main/games/cp">Play the demo</a></p>
+    <p>Its code is in <a href="https://github.com/joshhickson/friendslop/tree/main/games/cp">games/cp</a>, so you can see how a bigger game is put together.</p>
+  </section>
+
+  <section class="wrap doc" id="start" aria-labelledby="start-title">
+    <h2 id="start-title">Getting started</h2>
+    <p class="section-lede">You need a free GitHub account, Git and Node.js 20 or newer. Your game lives in your own copy (a fork) of the friendslop repo, because a game reaches the kit by relative paths and needs the repo around it.</p>
+    <ol class="steps four">
+      <li>
+        <h3>Fork it</h3>
+        <p>Press <strong>Fork</strong> on <a href="https://github.com/joshhickson/friendslop">the friendslop repo</a>, then copy your fork to your computer.</p>
+        <code class="cmd">git clone https://github.com/YOU/friendslop
+cd friendslop</code>
+      </li>
+      <li>
+        <h3>Start a game</h3>
+        <p>This copies the starter to <strong>games/my-game</strong>: a room where everyone is a dot that walks around, and a bot that wanders. It has no rules yet.</p>
+        <code class="cmd">npm run new-game -- my-game "My Game"</code>
+      </li>
+      <li>
+        <h3>Play it</h3>
+        <p>This installs what it needs the first time, starts a server on your PC and opens your browser at localhost:8080. Create a room, then join it from a second window to play against yourself.</p>
+        <code class="cmd">npm run play</code>
+      </li>
+      <li>
+        <h3>Change it</h3>
+        <p>Edit the files in <strong>games/my-game</strong>. With <strong>npm run dev</strong> the server restarts when you save, and a browser refresh picks up screen changes and keeps your seat.</p>
+        <code class="cmd">npm run dev</code>
+      </li>
+    </ol>
+  </section>
+
+  <section class="wrap doc" id="agent" aria-labelledby="agent-title">
+    <h2 id="agent-title">With your AI agent</h2>
+    <div class="prompt">
+      <div class="prompt-head">
+        <p>Paste this into Claude Code, Cursor or any coding agent that can run commands. It sets everything up, then asks you what game you want.</p>
+      </div>
+      <pre class="prompt-text" id="agent-prompt">Set me up to make a multiplayer game with friendslop.
+
+1. Fork https://github.com/joshhickson/friendslop to my GitHub
+   account and clone my fork. With the GitHub CLI that's:
+   gh repo fork joshhickson/friendslop --clone
+   If you can't fork it, tell me to press Fork on GitHub.
+2. Read docs/making-a-game.md before writing any code.
+3. In the clone, run: npm run new-game -- my-game "My Game"
+4. Ask me what game I want to make, and ask follow-up
+   questions until you know how it plays. Then build it
+   in games/my-game.
+5. Run npm run play and check it in two browser windows.
+6. Commit and push to my fork.
+7. Give me the link to the game folder. It looks like
+   https://github.com/MY-USERNAME/friendslop/tree/main/games/my-game</pre>
+      <button class="btn" type="button" data-copy="agent-prompt">Copy the prompt</button>
     </div>
+    <div class="page-body">
+      <p>Once it's going, a few things help:</p>
+      <ul>
+        <li>Describe how the game plays, more than how to code it. The agent knows where the code goes from the guide.</li>
+        <li>Ask for one change at a time and play it in two windows after each one.</li>
+        <li>When something breaks, paste the error from the browser console or the terminal back to the agent.</li>
+        <li>Ask it to add a <code>bot.js</code> early, so you have someone to play against.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap page-body doc" id="folder" aria-labelledby="folder-title">
+    <h2 id="folder-title">A game folder</h2>
+    <p>A game is one folder in <code>games/</code>. The server finds it when it starts.</p>
+    <code class="cmd">games/my-game/
+  server.js        rules and game state (required)
+  client/index.js  what players see and do (required)
+  bot.js           a bot player (optional)
+  shared/          code both sides use, such as maps
+  assets/          images, sounds and models</code>
+    <p>Use relative imports in <code>server.js</code>, <code>bot.js</code> and <code>shared/</code>, such as <code>../../server/kit/index.js</code> or <code>./shared/map.js</code>. A game shared by link runs those files in a Web Worker, where other paths don't resolve. Build asset addresses with <code>new URL('../assets/ship.png', import.meta.url)</code>.</p>
+  </section>
+
+  <section class="wrap doc" id="rules" aria-labelledby="rules-title">
+    <h2 id="rules-title">Where your rules go</h2>
+    <p class="section-lede">Rooms, passwords, the lobby, teams, team scores, the Tab scoreboard, chat, the Esc menu, reconnects and late joiners are done for you. You write two files.</p>
+    <div class="split">
+      <div class="panel">
+        <h3>server.js decides</h3>
+        <p>It describes the game with <code>defineGame</code>: name, player counts, teams, lobby settings, scoreboard columns and controls. Its <code>create(ctx)</code> runs when the host starts a match and returns the hooks:</p>
+        <ul>
+          <li><code>onPlayerJoin</code> and <code>onPlayerLeave</code></li>
+          <li><code>onMessage(player, type, data)</code> for what a player sends</li>
+          <li><code>tick(dt)</code>, called many times a second</li>
+          <li><code>onEnd</code> to clean up</li>
+        </ul>
+        <p>Send state with <code>ctx.broadcast</code>, keep score with <code>ctx.addTeamScore</code> and <code>ctx.addStat</code>, and finish with <code>ctx.endMatch</code>. Check everything a player sends: <code>isNum</code>, <code>isVec</code> and <code>clamp</code> are in the kit.</p>
+      </div>
+      <div class="panel">
+        <h3>client/index.js shows</h3>
+        <p>It draws the game and reads input with <code>defineClientGame</code>. Its <code>mount(api)</code> gets:</p>
+        <ul>
+          <li><code>api.root</code> for your canvas and <code>api.hud</code> for your overlay</li>
+          <li><code>api.send(type, data)</code>, which arrives in <code>onMessage</code></li>
+          <li><code>api.on(type, fn)</code> for what the server broadcasts</li>
+          <li><code>api.players()</code>, <code>api.me</code>, teams and scores</li>
+        </ul>
+        <p>The client kit has keyboard and mouse input, sounds with no files, and a three.js kit for low-poly 3D worlds, characters and effects.</p>
+      </div>
+    </div>
+    <p class="doc-more"><a href="https://github.com/joshhickson/friendslop/blob/main/docs/making-a-game.md#serverjs">Every hook, ctx and api call</a>, plus patterns for turn-based games, fast shooters and custom endings, are in the guide.</p>
+  </section>
+
+  <section class="wrap page-body doc" id="share" aria-labelledby="share-title">
+    <h2 id="share-title">Share it with a link</h2>
+    <p>Friends don't install anything, and you don't need a server.</p>
+    <ol class="doc-list">
+      <li>Push your game to your fork.</li>
+      <li>Open the game's folder on GitHub and copy the address, such as <code>https://github.com/you/friendslop/tree/main/games/my-game</code>.</li>
+      <li>Paste it into <a href="/#host-link">Got a game on GitHub?</a> on the homepage, or the <strong>Host a game from GitHub</strong> box on <a href="https://play.friendslop.us/">play.friendslop.us</a>, and press <strong>Host this game</strong>.</li>
+      <li>Send your friends the room link.</li>
+    </ol>
+    <p>For the link to work, the repo has to be public, no file can be over 20 MB, and the commit has to be under 150 MB in all. The files load from jsDelivr, a free public CDN for GitHub repos. If the kit has changed since you forked, the room tells you to update your fork.</p>
+    <p>The link is pinned to the commit you pasted, so the host and every friend run the same code. <strong>Push a fix, then paste the link again</strong> to play the new version. The first visit after a push can take half a minute while the files are fetched for the first time.</p>
+    <h3>Try the link path before you push</h3>
+    <p>Start the server with the dev CDN, which serves your checkout's files the way jsDelivr would. In PowerShell:</p>
+    <code class="cmd">$env:DEV_CDN = "1"; npm start</code>
+    <p>On macOS or Linux it's <code>DEV_CDN=1 npm start</code>. Then type a folder such as <code>games/my-game</code> into the link box, or press <strong>Try the starter game</strong>.</p>
+  </section>
+
+  <section class="wrap page-body doc" id="bots" aria-labelledby="bots-title">
+    <h2 id="bots-title">Bots</h2>
+    <p>Add a <code>bot.js</code> and the host gets a <strong>Bots</strong> panel in the lobby: how many, which team, and easy, normal or hard. A bot gets the same messages as a player's screen and sends the same ones, so your rules need no special cases. The starter's <code>bot.js</code> is the smallest one that works.</p>
+    <p>A team game can also fill both teams with bots when the match starts, the way the demo does, with <code>autoFill</code> in <code>defineGame</code>.</p>
+    <p>To join a room from another program or computer, use the bot runner with the room code and password:</p>
+    <code class="cmd">npm run bot -- --room ABC123 --password pizza --count 2 --difficulty hard</code>
+    <p>More on the <a href="/bots/">bots page</a> and in <a href="https://github.com/joshhickson/friendslop/blob/main/docs/making-a-game.md#botjs-optional">the guide</a>.</p>
+  </section>
+
+  <section class="wrap page-body doc" id="own-pc" aria-labelledby="own-pc-title">
+    <h2 id="own-pc-title">Hosting from your PC</h2>
+    <p><strong>npm run play</strong> runs the game on a server on your own PC, which only your computer can reach. To let friends on other networks in, run:</p>
+    <code class="cmd">npm run tunnel</code>
+    <p>It prints a public address ending in trycloudflare.com. Send that and the room password to your friends. It needs no account and opens no ports: your PC only connects out to Cloudflare, and friends never see your IP address. The address changes every run and stops when you press Ctrl+C, so it suits a night of playing. To keep a server up for good, see <a href="https://github.com/joshhickson/friendslop#hosting-it-for-everyone">hosting it for everyone</a> in the README.</p>
+  </section>
+
+  <section class="wrap page-body doc" id="trust" aria-labelledby="trust-title">
+    <h2 id="trust-title">Who keeps score</h2>
+    <p>For a game shared by link, the host's browser runs the rules and friendslop's server passes the messages along, checking each one. So <strong>the host could change the score</strong>, and the host controls the lobby bots. The game wears a banner that says so. A game that has to stop a cheating host needs a server you trust, which means running friendslop yourself.</p>
+    <p>Game code runs in a sandboxed frame that can't read friendslop's storage or pages or make ordinary network requests. The fence is best effort: a game can still show anything on screen, or reach an outside server that sees a player's IP address. Players are warned once per repo before an unreviewed game loads.</p>
+    <p><a href="https://github.com/joshhickson/friendslop/blob/main/docs/making-a-game.md#what-the-fence-stops-and-what-it-doesnt">What the fence stops and what it doesn't</a>, in the guide.</p>
+  </section>
+
+  <section class="wrap page-body doc" aria-labelledby="more-title">
+    <h2 id="more-title">Going further</h2>
+    <ul>
+      <li><a href="https://github.com/joshhickson/friendslop/blob/main/docs/making-a-game.md">The game guide</a>: every hook, the kits, patterns and debugging.</li>
+      <li><a href="https://github.com/joshhickson/friendslop#readme">The README</a>: running the server, security, and hosting it for everyone.</li>
+      <li><a href="/protocol/">The protocol</a>: the messages a room understands.</li>
+      <li><a href="https://github.com/joshhickson/friendslop/blob/main/CONTRIBUTING.md">Contributing</a>: sending a fix or a feature.</li>
+      <li>Stuck? <a href="https://github.com/joshhickson/friendslop/issues/new">Open an issue</a> and ask.</li>
+    </ul>
   </section>
 </main>
 
@@ -89,6 +228,7 @@
   </div>
 </footer>
 
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="/site.js"></script>
 </body>
 </html>

@@ -40,7 +40,7 @@
 
   <section class="wrap" aria-labelledby="who-title">
     <h2 id="who-title">Who can join a room</h2>
-    <p class="section-lede">Anything that speaks the protocol. Today that's the browser client. Later it's whatever you write.</p>
+    <p class="section-lede">Anything that speaks the protocol. Today that's the browser client and the bot runner, both in JavaScript. Later it's whatever you write.</p>
     <div class="speakers">
       <div class="speaker now">Browser client<small>JavaScript, today</small></div>
       <div class="speaker">Phone client<small>Rust and WebAssembly, later</small></div>
@@ -76,7 +76,8 @@
     <h2 id="why-title">Why not just pick a language</h2>
     <p>Browser games are moving fast. Rust compiled to WebAssembly now boots a 3D game on an old phone in seconds, and the next fast thing will be something else.</p>
     <p>Tying friendslop to one language would mean rewriting it every time. Writing the protocol down means a new client can join the rooms everyone is already playing in.</p>
-    <p>The messages already live in one shared module in the alpha. The written spec comes once the alpha settles. <a href="https://github.com/joshhickson/friendslop">Watch the repo</a> to see it land.</p>
+    <p>The messages already live in one shared module in the alpha, <a href="https://github.com/joshhickson/friendslop/blob/main/shared/protocol.js">shared/protocol.js</a>. The written spec comes once the alpha settles. <a href="https://github.com/joshhickson/friendslop">Watch the repo</a> to see it land.</p>
+    <p>One part is settled already. A program that connects to <strong>/ws</strong> gets every message as plain JSON text, so the simplest bot needs nothing but a WebSocket. Browsers connect to <strong>/ws?z=1</strong> instead and get the same messages packed into one compressed stream, about an eighth of the size. The shared module says how to unpack it.</p>
   </section>
 </main>
 
