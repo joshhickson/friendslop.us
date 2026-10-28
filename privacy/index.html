@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy | friendslop</title>
+<meta name="description" content="What friendslop.us and play.friendslop.us collect, what they keep, and who else sees it.">
+<meta property="og:title" content="Privacy | friendslop">
+<meta property="og:description" content="What friendslop.us and play.friendslop.us collect, what they keep, and who else sees it.">
+<meta property="og:url" content="https://friendslop.us/privacy/">
+<meta name="theme-color" content="#c9c7be">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='16' height='16' fill='%23ff00dc'/%3E%3Crect x='16' y='16' width='16' height='16' fill='%23ff00dc'/%3E%3Crect x='16' width='16' height='16' fill='%23000'/%3E%3Crect y='16' width='16' height='16' fill='%23000'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="wrap bar">
+  <a class="logo" href="/" aria-label="friendslop home"><span class="logo-cube" aria-hidden="true"></span>friendslop</a>
+  <div class="bar-right">
+    <nav class="nav" aria-label="Main">
+      <a href="/games/">Games</a>
+      <a href="/bots/">Bots</a>
+      <a href="/protocol/">Protocol</a>
+      <a href="/docs/">Docs</a>
+      <a href="/roadmap/">Roadmap</a>
+      <a href="/jam/">Jam</a>
+      <a href="https://github.com/joshhickson/friendslop">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="wrap page-hero">
+    <h1>Privacy</h1>
+    <p class="lede">friendslop has no accounts, no ads, no analytics and no cookies. Here is everything it does see, how long it keeps it, and who else is in the path.</p>
+    <p class="doc-date">Last updated 28 October 2026.</p>
+  </section>
+
+  <section class="wrap page-body doc" aria-labelledby="short-title">
+    <h2 id="short-title">The short version</h2>
+    <ul>
+      <li>The name you type is shown to the other players in your room and saved in your own browser.</li>
+      <li>Rooms, passwords, chat and scores live in the server's memory while the room is open, and are gone when it closes.</li>
+      <li>Your IP address is used to slow down spam and password guessing. The server's log records the IP address of whoever creates a room, and those logs are kept for seven days.</li>
+      <li>Games shared by link are made by other people. A game can see your IP address, the way any website can.</li>
+      <li>Nothing is sold, shared for advertising or used to build a profile of you.</li>
+    </ul>
+  </section>
+
+  <section class="wrap page-body doc" aria-labelledby="who-title">
+    <h2 id="who-title">Who runs it</h2>
+    <p>friendslop.us and play.friendslop.us are run by Josh Hickson. Questions about this page, or a request to delete something, go to <a href="mailto:contact@joshuahickson.org">contact@joshuahickson.org</a>.</p>
+    <p>friendslop is open source, so anyone can run their own copy. This page covers only the two sites above. A server somebody else runs, including one shared with <strong>npm run tunnel</strong>, is theirs, and so is what it keeps.</p>
+  </section>
+
+  <section class="wrap page-body doc" aria-labelledby="site-title">
+    <h2 id="site-title">friendslop.us</h2>
+    <p>This site is a set of plain pages. It sets no cookies, runs no analytics and has no forms that send anything to us. The room code box and the game link box only send you to play.friendslop.us with what you typed in the address.</p>
+    <p>Two outside services see your visit:</p>
+    <ul>
+      <li><strong>GitHub Pages</strong> serves the pages, and GitHub logs requests for security under <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">its privacy statement</a>.</li>
+      <li><strong>Google Fonts</strong> serves the two typefaces, so your browser sends your IP address and browser details to Google. Google describes what it does with them in <a href="https://developers.google.com/fonts/faq/privacy">its Fonts privacy notes</a>.</li>
+    </ul>
+  </section>
+
+  <section class="wrap page-body doc" aria-labelledby="play-title">
+    <h2 id="play-title">play.friendslop.us</h2>
+    <h3>What you give it</h3>
+    <ul>
+      <li><strong>Your name.</strong> The other players in your room see it, and it can appear in chat, on the scoreboard and in the line that announces the result of a match.</li>
+      <li><strong>Room passwords and chat.</strong> Held in the server's memory only, for as long as the room is open. They are never written to disk or to the logs.</li>
+    </ul>
+    <h3>What it keeps, and for how long</h3>
+    <ul>
+      <li><strong>Rooms, teams, scores and stats</strong> stay in memory until the room closes, either when its last person leaves or after it sits idle. A restart of the server clears everything.</li>
+      <li><strong>Your IP address</strong> is held in memory to limit how many connections and rooms one address can open and to lock out repeated wrong passwords. Those counters clear themselves within minutes.</li>
+      <li><strong>The server's log</strong> records when a room is created, with the room code, the game, whether it has a password and the creator's IP address. It also records when matches start and end, and the result line, which can include a player's name. The service that hosts the server keeps these logs for seven days.</li>
+      <li><strong>A daily traffic total</strong> for the whole server, with no per-person detail.</li>
+    </ul>
+    <h3>What it saves in your browser</h3>
+    <p>No cookies. The app keeps a few things in your browser's own storage. Only the name and the seat token are ever sent to the server, when you join a room.</p>
+    <ul>
+      <li>the name you last used, so you don't type it again;</li>
+      <li>a seat token for the room you're in, so a refresh puts you back in your seat (cleared when you close the tab);</li>
+      <li>which game repos you've said yes to on the first-look warning, and which game banners you closed this session.</li>
+    </ul>
+    <p>Clearing your browser's site data for play.friendslop.us removes all of it.</p>
+  </section>
+
+  <section class="wrap page-body doc" aria-labelledby="games-title">
+    <h2 id="games-title">Games shared by link</h2>
+    <p>Anyone can host a game from a public GitHub repo, and nobody reviews it first. When you play one:</p>
+    <ul>
+      <li>its files load from <strong>jsDelivr</strong>, a public CDN, which sees your IP address under <a href="https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net">its privacy policy</a>;</li>
+      <li>the host's browser asks <strong>GitHub</strong> which commit a link points to;</li>
+      <li>the game runs in a sandboxed frame that can't read friendslop's storage or pages. It can still reach an outside server, which would see your IP address, and it can show anything on screen. Never type a password into a game.</li>
+    </ul>
+    <p>That's why you see a warning before an unreviewed game first loads. What a game made by somebody else does with your data is up to its maker. An unreviewed game's banner has a report link, which opens a public GitHub issue.</p>
+  </section>
+
+  <section class="wrap page-body doc" aria-labelledby="path-title">
+    <h2 id="path-title">Who else is in the path</h2>
+    <ul>
+      <li><a href="https://render.com/privacy">Render</a> hosts the game server and keeps its logs.</li>
+      <li><a href="https://www.cloudflare.com/privacypolicy/">Cloudflare</a> carries Render's traffic, and routes email sent to the contact address.</li>
+      <li><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub</a> hosts this site, the code and the issues.</li>
+      <li><a href="https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net">jsDelivr</a> serves the files of games shared by link.</li>
+      <li><a href="https://policies.google.com/privacy">Google</a> serves this site's fonts. The play app serves its own.</li>
+    </ul>
+    <p>Each keeps its own logs under its own policy.</p>
+  </section>
+
+  <section class="wrap page-body doc" aria-labelledby="talk-title">
+    <h2 id="talk-title">Issues and email</h2>
+    <p>GitHub issues and pull requests are public, so don't put anything private in them. Email to the contact address is read by Josh, used only to answer you, and deleted when you ask.</p>
+  </section>
+
+  <section class="wrap page-body doc" aria-labelledby="kids-title">
+    <h2 id="kids-title">Children</h2>
+    <p>friendslop isn't made for children under 13 and doesn't ask anyone's age. If you think a child has sent us personal information, email the contact address and it will be deleted.</p>
+  </section>
+
+  <section class="wrap page-body doc" aria-labelledby="ask-title">
+    <h2 id="ask-title">Asking, and changes</h2>
+    <p>You can ask what we hold about you, or ask for it to be deleted, at <a href="mailto:contact@joshuahickson.org">contact@joshuahickson.org</a>. Since there are no accounts, the most there will be is a log line from the last seven days or an email you sent.</p>
+    <p>When this page changes, the date at the top changes too, and every earlier version is in <a href="https://github.com/joshhickson/friendslop.us/commits/main/privacy/index.html">the site's history on GitHub</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav aria-label="Footer">
+      <a href="/games/">Games</a>
+      <a href="/bots/">Bots</a>
+      <a href="/protocol/">Protocol</a>
+      <a href="/docs/">Docs</a>
+      <a href="/roadmap/">Roadmap</a>
+      <a href="/jam/">Jam</a>
+      <a href="/privacy/" aria-current="page">Privacy</a>
+      <a href="https://github.com/joshhickson/friendslop">GitHub</a>
+    </nav>
+    <span>friendslop.us. Built by one person and a lot of bots. <a href="/#together">Pull requests welcome, and so are you.</a></span>
+  </div>
+</footer>
+
+<script src="/site.js"></script>
+</body>
+</html>
